@@ -1,0 +1,18 @@
+TODO
+
+gui:
+	window set_title, set_option, get_options, updater, displayer
+	element destroyer, updater, displayer, element_text
+
+find a way to handle all this crap together...
+
+
+
+window
+	[elements]
+		element_text
+		element_button
+		element_image
+		element_input
+
+each of them having different types and sizes of data.

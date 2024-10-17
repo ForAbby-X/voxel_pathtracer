@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/vec2f_test.c.o -c /projects/spoti_gui/src/vec2f_test.c",
+  "file": "/projects/spoti_gui/src/vec2f_test.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/random.c.o -c /projects/spoti_gui/src/random.c",
+  "file": "/projects/spoti_gui/src/random.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/interaction_tools.c.o -c /projects/spoti_gui/src/gui/interaction_tools.c",
+  "file": "/projects/spoti_gui/src/gui/interaction_tools.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/window.c.o -c /projects/spoti_gui/src/gui/window.c",
+  "file": "/projects/spoti_gui/src/gui/window.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/element.c.o -c /projects/spoti_gui/src/gui/element.c",
+  "file": "/projects/spoti_gui/src/gui/element.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/methodes/none.c.o -c /projects/spoti_gui/src/gui/methodes/none.c",
+  "file": "/projects/spoti_gui/src/gui/methodes/none.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/methodes/text.c.o -c /projects/spoti_gui/src/gui/methodes/text.c",
+  "file": "/projects/spoti_gui/src/gui/methodes/text.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/methodes/color.c.o -c /projects/spoti_gui/src/gui/methodes/color.c",
+  "file": "/projects/spoti_gui/src/gui/methodes/color.c"
+},
+{
+  "directory": "/projects/spoti_gui/build",
+  "command": "/usr/bin/cc  -I/projects/spoti_gui/inc -I/projects/spoti_gui/lib/inc -I/projects/spoti_gui/engine/inc -g -std=gnu99 -o CMakeFiles/gui_test.out.dir/src/gui/methodes/image.c.o -c /projects/spoti_gui/src/gui/methodes/image.c",
+  "file": "/projects/spoti_gui/src/gui/methodes/image.c"
+}
+]

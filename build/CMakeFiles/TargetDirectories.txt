@@ -1,0 +1,3 @@
+/projects/spoti_gui/build/CMakeFiles/gui_test.out.dir
+/projects/spoti_gui/build/CMakeFiles/edit_cache.dir
+/projects/spoti_gui/build/CMakeFiles/rebuild_cache.dir

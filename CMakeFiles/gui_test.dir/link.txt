@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/gui_test.dir/src/main.c.o -o gui_test 

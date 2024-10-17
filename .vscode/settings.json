@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"methodes.h": "c",
+		"string.h": "c",
+		"map.h": "c",
+		"iterator": "c"
+	}
+}

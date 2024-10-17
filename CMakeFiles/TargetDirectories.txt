@@ -1,0 +1,3 @@
+/projects/perso/raytracer/CMakeFiles/raycaster.out.dir
+/projects/perso/raytracer/CMakeFiles/edit_cache.dir
+/projects/perso/raytracer/CMakeFiles/rebuild_cache.dir
