@@ -68,9 +68,9 @@ __always_inline uint8_t	map_occupency_get(Map *map, v3ui pos)
 	return chunk->occupency.mask;
 }
 
-RayHit	map_cast_ray(Map *map, Ray ray);
+RayHit	map_cast_ray(Map *map, Ray ray, float first_dist, float second_dist, float max_dist);
 RayHit	map_cast_ray_brick_depth(Map *map, Ray ray);
 
-void	map_render(Engine *eng, Map *map, Camera *cam);
+void	map_render(Engine *eng, Map *map, Camera *cam, uint32_t ticks_passed);
 
 #endif

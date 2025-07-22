@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/projects/perso/raytracer/inc -I/projects/perso/raytracer/lib/inc -I/projects/perso/raytracer/engine/inc
+C_INCLUDES = -I/home/forabby/Projects/voxel_pathtracer/inc -I/home/forabby/Projects/voxel_pathtracer/lib/inc -I/home/forabby/Projects/voxel_pathtracer/engine/inc
 
-C_FLAGS = -Wextra -Wall -Werror -Ofast
+C_FLAGS = -Ofast
 

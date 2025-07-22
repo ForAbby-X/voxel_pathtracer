@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /projects/perso/raytracer
+CMAKE_SOURCE_DIR = /home/forabby/Projects/voxel_pathtracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /projects/perso/raytracer
+CMAKE_BINARY_DIR = /home/forabby/Projects/voxel_pathtracer
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/raycaster.out.dir/clean
 CMakeFiles/raycaster.out.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/raycaster.out.dir/build.make CMakeFiles/raycaster.out.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/raycaster.out.dir/build.make CMakeFiles/raycaster.out.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target raycaster.out"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target raycaster.out"
 .PHONY : CMakeFiles/raycaster.out.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/raycaster.out.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /projects/perso/raytracer/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/forabby/Projects/voxel_pathtracer/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/raycaster.out.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /projects/perso/raytracer/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/forabby/Projects/voxel_pathtracer/CMakeFiles 0
 .PHONY : CMakeFiles/raycaster.out.dir/rule
 
 # Convenience name for target.

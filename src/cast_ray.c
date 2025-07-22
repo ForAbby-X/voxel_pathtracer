@@ -28,7 +28,7 @@
 // 	return (tmm[0] < tmm[1] && tmm[1] >= 0.f && tmm[0] >= 0.f && tmm[0] < 1.f);
 // }
 
-__always_inline void ray_intersect(v3f ray_pos, v3f dir_inv, v3f box_min, v3f box_max, float *t)
+__always_inline void ray_box_intersect(v3f ray_pos, v3f dir_inv, v3f box_min, v3f box_max, float *t)
 {
 	v3f off[2] = {(box_min - ray_pos) * dir_inv, (box_max - ray_pos) * dir_inv};
 	float tm[2];
@@ -41,7 +41,7 @@ __always_inline void ray_intersect(v3f ray_pos, v3f dir_inv, v3f box_min, v3f bo
 	tm[MIN] = fmaxf(tm[MIN], fminf(off[MIN][_z], off[MAX][_z]));
 	tm[MAX] = fminf(tm[MAX], fmaxf(off[MIN][_z], off[MAX][_z]));
 
-	/* This is the percentage of direction at wich we intersect */	
+	/* This is the distance percentage between the ray and the closest box face */	
 	*t = tm[tm[0] < 0];
 }
 
@@ -149,7 +149,7 @@ __always_inline void ray_intersect(v3f ray_pos, v3f dir_inv, v3f box_min, v3f bo
 // 			v3f box_min = __builtin_convertvector(chunk_pos * 8, v3f) - 0.0001f;
 // 			v3f box_max = box_min + 8.0f + 0.0001f * 2.0f;
 			
-// 			ray_intersect(ray.pos, dir_inv, box_min, box_max, &t);
+// 			ray_box_intersect(ray.pos, dir_inv, box_min, box_max, &t);
 // 			ray.pos += ray.dir * t;
 // 			block_pos = (v3ui){(int)(ray.pos[_x] + 1), (int)(ray.pos[_y] + 1), (int)(ray.pos[_z] + 1)} - 1;
 // 			hit->step++;
@@ -161,9 +161,15 @@ __always_inline void ray_intersect(v3f ray_pos, v3f dir_inv, v3f box_min, v3f bo
 // 	hit->dist = v3f_mag(ray.pos - start);
 // }
 
-RayHit map_cast_ray(Map *map, Ray ray)
+// RayHit map_cast_ray_lod(Map *map, Ray ray, uint32_t first_level, uint32_t second_level)
+// {
+
+// }
+
+
+RayHit map_cast_ray(Map *map, Ray ray, float first_dist, float second_dist, float max_dist)
 {
-	RayHit hit;
+	RayHit hit = {0};
 
 	v3f start = ray.pos;
 
@@ -180,13 +186,13 @@ RayHit map_cast_ray(Map *map, Ray ray)
 	dir_inv_abs[_y] = fabsf(dir_inv[_y]);
 	dir_inv_abs[_z] = fabsf(dir_inv[_z]);
 
-	v3si ray_step = (ray.dir < 0) + ((ray.dir < 0) + 1); /* Unreadable but i am lazy */
+	v3ui ray_step = (ray.dir < 0) + ((ray.dir < 0) + 1); /* Unreadable but i am lazy */
 
 	float t = 0.0f;
 
 	hit.step = 0;
 
-	while (1)
+	while (hit.dist < max_dist)
 	{
 		if (block_pos[_x] >= map->size[_x]
 		||  block_pos[_y] >= map->size[_y]
@@ -205,6 +211,10 @@ RayHit map_cast_ray(Map *map, Ray ray)
 		v3ui sub_brick_pos = brick_pos / 4;
 		if (chunk->occupency.bricks[sub_brick_pos[_x]][sub_brick_pos[_y]][sub_brick_pos[_z]])
 		{
+
+			if (hit.dist >= second_dist)
+				break ;
+
 			/* DDA - Ray box positive intersection */
 
 			v3f ray_side_dist;
@@ -213,7 +223,7 @@ RayHit map_cast_ray(Map *map, Ray ray)
 			ray_side_dist[_z] = (ray.dir[_z] < 0) ? (ray.pos[_z] - block_pos[_z]) : (block_pos[_z] + 1.0f - ray.pos[_z]);
 			ray_side_dist *= dir_inv_abs;
 
-			v3si inc;
+			v3si inc = {0, 0, 0};
 			while (chunk->blocks[brick_pos[_x]][brick_pos[_y]][brick_pos[_z]] == 0)
 			{
 				inc[_x] = ((ray_side_dist[_x] <= ray_side_dist[_y]) && (ray_side_dist[_x] <= ray_side_dist[_z]));
@@ -256,15 +266,17 @@ RayHit map_cast_ray(Map *map, Ray ray)
 				box_max = box_min + 4.0f + 0.0001f * 2.0f;
 			}
 
-			ray_intersect(ray.pos, dir_inv, box_min, box_max, &t);
+			ray_box_intersect(ray.pos, dir_inv, box_min, box_max, &t);
 			ray.pos += ray.dir * t;
 			block_pos = (v3ui){(int)(ray.pos[_x] + 1), (int)(ray.pos[_y] + 1), (int)(ray.pos[_z] + 1)} - 1;
 			hit.step++;
 		}
+		// TODO(Alan): TEMPORARY!!! To implement properly with square calculation.
+		hit.dist = v3f_mag(ray.pos - start);
 	}
 
-	hit.block_pos = block_pos;
-	hit.normal = (v3f){0.0f, 0.0f, 0.0f};
+	hit.block_pos =  __builtin_convertvector(block_pos, v3si);
+	hit.normal = (v3si){0.0f, 0.0f, 0.0f};
 	hit.real_pos = ray.pos;
 	hit.dist = v3f_mag(ray.pos - start);
 	
@@ -289,6 +301,9 @@ RayHit map_cast_ray_brick_depth(Map *map, Ray ray)
 
 	hit.step = 0;
 
+	v3f box_min = {0};
+	v3f box_max = {0};
+
 	// int last_move = 0;
 	while (1)
 	{
@@ -311,9 +326,6 @@ RayHit map_cast_ray_brick_depth(Map *map, Ray ray)
 			break ;
 		
 		/* Raw - Ray box intersection */
-		
-		v3f box_min;
-		v3f box_max;
 
 		if (chunk->occupency.mask == 0)
 		{
@@ -326,16 +338,19 @@ RayHit map_cast_ray_brick_depth(Map *map, Ray ray)
 			box_max = box_min + 4.0f + 0.0001f * 2.0f;
 		}
 
-		ray_intersect(ray.pos, dir_inv, box_min, box_max, &t);
+		ray_box_intersect(ray.pos, dir_inv, box_min, box_max, &t);
 		ray.pos += ray.dir * t;
 		block_pos = (v3ui){(int)(ray.pos[_x] + 1), (int)(ray.pos[_y] + 1), (int)(ray.pos[_z] + 1)} - 1;
 		hit.step++;
 	}
 
-	hit.block_pos = block_pos;
-	hit.normal = (v3f){0.0f, 0.0f, 0.0f};
+	hit.block_pos = __builtin_convertvector(block_pos, v3si);
+	hit.normal = (v3si){0.0f, 0.0f, 0.0f};
 	hit.real_pos = ray.pos;
-	hit.dist = v3f_mag(ray.pos - start);
+	// Info(Alan): Made some changes here to try to fix the go into a block after depth mipmap ray move.
+	//				The 1.5 times the size of the last chunk size traversed is an unprecise trick to limit
+	//				the appearance of artifacts when a ray is sent too far (into a block) after the first depth map offset. 
+	hit.dist = fmaxf(v3f_mag(ray.pos - start) - (box_max[_x] - box_min[_x]) * 1.5f, 0.0f);
 	
 	return (hit);
 }

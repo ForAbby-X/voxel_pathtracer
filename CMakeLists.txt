@@ -19,13 +19,13 @@ set(BUILD_SHARED_LIBS FALSE)
 
 set(MAIN_PROG raycaster.out)
 add_executable(${MAIN_PROG})
-target_compile_options(${MAIN_PROG} PUBLIC -Wextra -Wall -Werror -Ofast)
+target_compile_options(${MAIN_PROG} PUBLIC -Ofast) #-Wextra -Wall -Werror 
 target_link_directories(${MAIN_PROG}
 	PUBLIC lib
 	PUBLIC engine
 	PUBLIC engine/minilibx-linux
 	)
-target_link_libraries(${MAIN_PROG} m vector Xext X11 Xfixes engine)
+target_link_libraries(${MAIN_PROG} engine m vector X11 Xext Xfixes)
 target_include_directories(${MAIN_PROG}
 	PUBLIC inc/
 	PUBLIC lib/inc/

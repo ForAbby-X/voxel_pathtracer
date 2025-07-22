@@ -11,9 +11,10 @@
 
 struct s_data
 {
-	Sprite	*screen;
-	Map		map;
-	Camera	cam;
+	Sprite *screen;
+	Map map;
+	Camera cam;
+	uint32_t ticks_passed;
 };
 
 static int _init(Engine *eng, t_data *game)
@@ -30,7 +31,7 @@ static int _init(Engine *eng, t_data *game)
 		return 1;
 	}
 
-	if (map_init(&game->map, (v3ui){64, 64, 64} / 8))
+	if (map_init(&game->map, (v3ui){64, 32, 64} / 4))
 	{
 		fprintf(stderr, "Error: map creation\n");
 		return 1;
@@ -39,9 +40,9 @@ static int _init(Engine *eng, t_data *game)
 		for (uint32_t y = 0; y < game->map.size[_y]; y++) {
 			for (uint32_t z = 0; z < game->map.size[_z]; z++) {
 				if (y > 58)
-					map_set(&game->map, (v3si){x, y, z}, (my_rand_u32() & 63) < 1);
+					map_set(&game->map, (v3ui){x, y, z}, (my_rand_u32() & 63) < 1);
 				else if (y < sinf(x / 64.0f * M_PI * 5) * 30.f)
-					map_set(&game->map, (v3si){x, y, z}, 1);
+					map_set(&game->map, (v3ui){x, y, z}, 1);
 			}
 		}
 	}
@@ -51,6 +52,7 @@ static int _init(Engine *eng, t_data *game)
 	game->cam.fov = M_PI_2;
 	game->cam.pos = (v3f){32.5f, 38.5f, 32.5f};
 	game->cam.rot = (v2f){0.0f, 0.0f};
+	game->ticks_passed = 0;
 
 	return 0;
 }
@@ -88,11 +90,13 @@ static int _on_repeat(Engine *eng, t_data *game, double dt)
 	/* Render */
 
 	ft_eng_sel_spr(eng, game->screen);
-	ft_clear(eng, (Color){0x00FF0000});
-	map_render(eng, &game->map, &game->cam);
+	// ft_clear(eng, (Color){0x00FF0000});
+	map_render(eng, &game->map, &game->cam, game->ticks_passed);
 
 	ft_eng_sel_spr(eng, eng->screen);
-	ft_put_sprite_s(eng, game->screen, (v2ui){0, 0}, 2);
+	ft_put_sprite_s(eng, game->screen, (v2si){0, 0}, 2);
+
+	game->ticks_passed++;
 
 	return 1;
 }

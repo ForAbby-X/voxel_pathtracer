@@ -1,4 +1,4 @@
-# Install script for directory: /projects/perso/raytracer
+# Install script for directory: /home/forabby/Projects/voxel_pathtracer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/projects/perso/raytracer/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/forabby/Projects/voxel_pathtracer/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

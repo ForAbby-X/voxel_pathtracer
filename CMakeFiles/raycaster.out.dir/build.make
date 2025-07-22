@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /projects/perso/raytracer
+CMAKE_SOURCE_DIR = /home/forabby/Projects/voxel_pathtracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /projects/perso/raytracer
+CMAKE_BINARY_DIR = /home/forabby/Projects/voxel_pathtracer
 
 # Include any dependencies generated for this target.
 include CMakeFiles/raycaster.out.dir/depend.make
@@ -72,72 +72,72 @@ include CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/random.c.o: CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/random.c.o: src/random.c
 CMakeFiles/raycaster.out.dir/src/random.c.o: CMakeFiles/raycaster.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/raycaster.out.dir/src/random.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/random.c.o -MF CMakeFiles/raycaster.out.dir/src/random.c.o.d -o CMakeFiles/raycaster.out.dir/src/random.c.o -c /projects/perso/raytracer/src/random.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/raycaster.out.dir/src/random.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/random.c.o -MF CMakeFiles/raycaster.out.dir/src/random.c.o.d -o CMakeFiles/raycaster.out.dir/src/random.c.o -c /home/forabby/Projects/voxel_pathtracer/src/random.c
 
 CMakeFiles/raycaster.out.dir/src/random.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/raycaster.out.dir/src/random.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /projects/perso/raytracer/src/random.c > CMakeFiles/raycaster.out.dir/src/random.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/forabby/Projects/voxel_pathtracer/src/random.c > CMakeFiles/raycaster.out.dir/src/random.c.i
 
 CMakeFiles/raycaster.out.dir/src/random.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/raycaster.out.dir/src/random.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /projects/perso/raytracer/src/random.c -o CMakeFiles/raycaster.out.dir/src/random.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/forabby/Projects/voxel_pathtracer/src/random.c -o CMakeFiles/raycaster.out.dir/src/random.c.s
 
 CMakeFiles/raycaster.out.dir/src/map.c.o: CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/map.c.o: src/map.c
 CMakeFiles/raycaster.out.dir/src/map.c.o: CMakeFiles/raycaster.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/raycaster.out.dir/src/map.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/map.c.o -MF CMakeFiles/raycaster.out.dir/src/map.c.o.d -o CMakeFiles/raycaster.out.dir/src/map.c.o -c /projects/perso/raytracer/src/map.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/raycaster.out.dir/src/map.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/map.c.o -MF CMakeFiles/raycaster.out.dir/src/map.c.o.d -o CMakeFiles/raycaster.out.dir/src/map.c.o -c /home/forabby/Projects/voxel_pathtracer/src/map.c
 
 CMakeFiles/raycaster.out.dir/src/map.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/raycaster.out.dir/src/map.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /projects/perso/raytracer/src/map.c > CMakeFiles/raycaster.out.dir/src/map.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/forabby/Projects/voxel_pathtracer/src/map.c > CMakeFiles/raycaster.out.dir/src/map.c.i
 
 CMakeFiles/raycaster.out.dir/src/map.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/raycaster.out.dir/src/map.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /projects/perso/raytracer/src/map.c -o CMakeFiles/raycaster.out.dir/src/map.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/forabby/Projects/voxel_pathtracer/src/map.c -o CMakeFiles/raycaster.out.dir/src/map.c.s
 
 CMakeFiles/raycaster.out.dir/src/cast_ray.c.o: CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/cast_ray.c.o: src/cast_ray.c
 CMakeFiles/raycaster.out.dir/src/cast_ray.c.o: CMakeFiles/raycaster.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/raycaster.out.dir/src/cast_ray.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/cast_ray.c.o -MF CMakeFiles/raycaster.out.dir/src/cast_ray.c.o.d -o CMakeFiles/raycaster.out.dir/src/cast_ray.c.o -c /projects/perso/raytracer/src/cast_ray.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/raycaster.out.dir/src/cast_ray.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/cast_ray.c.o -MF CMakeFiles/raycaster.out.dir/src/cast_ray.c.o.d -o CMakeFiles/raycaster.out.dir/src/cast_ray.c.o -c /home/forabby/Projects/voxel_pathtracer/src/cast_ray.c
 
 CMakeFiles/raycaster.out.dir/src/cast_ray.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/raycaster.out.dir/src/cast_ray.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /projects/perso/raytracer/src/cast_ray.c > CMakeFiles/raycaster.out.dir/src/cast_ray.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/forabby/Projects/voxel_pathtracer/src/cast_ray.c > CMakeFiles/raycaster.out.dir/src/cast_ray.c.i
 
 CMakeFiles/raycaster.out.dir/src/cast_ray.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/raycaster.out.dir/src/cast_ray.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /projects/perso/raytracer/src/cast_ray.c -o CMakeFiles/raycaster.out.dir/src/cast_ray.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/forabby/Projects/voxel_pathtracer/src/cast_ray.c -o CMakeFiles/raycaster.out.dir/src/cast_ray.c.s
 
 CMakeFiles/raycaster.out.dir/src/render.c.o: CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/render.c.o: src/render.c
 CMakeFiles/raycaster.out.dir/src/render.c.o: CMakeFiles/raycaster.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/raycaster.out.dir/src/render.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/render.c.o -MF CMakeFiles/raycaster.out.dir/src/render.c.o.d -o CMakeFiles/raycaster.out.dir/src/render.c.o -c /projects/perso/raytracer/src/render.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/raycaster.out.dir/src/render.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/render.c.o -MF CMakeFiles/raycaster.out.dir/src/render.c.o.d -o CMakeFiles/raycaster.out.dir/src/render.c.o -c /home/forabby/Projects/voxel_pathtracer/src/render.c
 
 CMakeFiles/raycaster.out.dir/src/render.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/raycaster.out.dir/src/render.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /projects/perso/raytracer/src/render.c > CMakeFiles/raycaster.out.dir/src/render.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/forabby/Projects/voxel_pathtracer/src/render.c > CMakeFiles/raycaster.out.dir/src/render.c.i
 
 CMakeFiles/raycaster.out.dir/src/render.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/raycaster.out.dir/src/render.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /projects/perso/raytracer/src/render.c -o CMakeFiles/raycaster.out.dir/src/render.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/forabby/Projects/voxel_pathtracer/src/render.c -o CMakeFiles/raycaster.out.dir/src/render.c.s
 
 CMakeFiles/raycaster.out.dir/src/main.c.o: CMakeFiles/raycaster.out.dir/flags.make
 CMakeFiles/raycaster.out.dir/src/main.c.o: src/main.c
 CMakeFiles/raycaster.out.dir/src/main.c.o: CMakeFiles/raycaster.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/raycaster.out.dir/src/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/main.c.o -MF CMakeFiles/raycaster.out.dir/src/main.c.o.d -o CMakeFiles/raycaster.out.dir/src/main.c.o -c /projects/perso/raytracer/src/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/raycaster.out.dir/src/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/raycaster.out.dir/src/main.c.o -MF CMakeFiles/raycaster.out.dir/src/main.c.o.d -o CMakeFiles/raycaster.out.dir/src/main.c.o -c /home/forabby/Projects/voxel_pathtracer/src/main.c
 
 CMakeFiles/raycaster.out.dir/src/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/raycaster.out.dir/src/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /projects/perso/raytracer/src/main.c > CMakeFiles/raycaster.out.dir/src/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/forabby/Projects/voxel_pathtracer/src/main.c > CMakeFiles/raycaster.out.dir/src/main.c.i
 
 CMakeFiles/raycaster.out.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/raycaster.out.dir/src/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /projects/perso/raytracer/src/main.c -o CMakeFiles/raycaster.out.dir/src/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/forabby/Projects/voxel_pathtracer/src/main.c -o CMakeFiles/raycaster.out.dir/src/main.c.s
 
 # Object files for target raycaster.out
 raycaster_out_OBJECTS = \
@@ -157,7 +157,7 @@ raycaster.out: CMakeFiles/raycaster.out.dir/src/render.c.o
 raycaster.out: CMakeFiles/raycaster.out.dir/src/main.c.o
 raycaster.out: CMakeFiles/raycaster.out.dir/build.make
 raycaster.out: CMakeFiles/raycaster.out.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/projects/perso/raytracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable raycaster.out"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/forabby/Projects/voxel_pathtracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable raycaster.out"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raycaster.out.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -169,6 +169,6 @@ CMakeFiles/raycaster.out.dir/clean:
 .PHONY : CMakeFiles/raycaster.out.dir/clean
 
 CMakeFiles/raycaster.out.dir/depend:
-	cd /projects/perso/raytracer && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /projects/perso/raytracer /projects/perso/raytracer /projects/perso/raytracer /projects/perso/raytracer /projects/perso/raytracer/CMakeFiles/raycaster.out.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/forabby/Projects/voxel_pathtracer && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/forabby/Projects/voxel_pathtracer /home/forabby/Projects/voxel_pathtracer /home/forabby/Projects/voxel_pathtracer /home/forabby/Projects/voxel_pathtracer /home/forabby/Projects/voxel_pathtracer/CMakeFiles/raycaster.out.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/raycaster.out.dir/depend
 

@@ -4,7 +4,8 @@
 #include "pthread.h"
 #include <time.h>
 
-#define DEPTH_MAP_RESOLUTION 32
+#define DEPTH_MAP_RESOLUTION 64
+#define WORKER_NUMBER 8
 
 typedef struct Worker
 {
@@ -19,6 +20,7 @@ typedef struct Worker
 	v3f plane_dir_right;
 	v3f plane_dir_down;
 	float *depth_mipmap;
+	uint32_t ticks_passed;
 } Worker;
 
 void render_scop(Worker *worker)
@@ -35,7 +37,7 @@ void render_scop(Worker *worker)
 	
 	for (uint32_t y = pos[_y]; y < pos[_y] + dim[_y]; ++y)
 	{
-		for (uint32_t x = pos[_x]; x < pos[_x] + dim[_x]; ++x)
+		for (uint32_t x = pos[_x] + ((y + worker->ticks_passed) & 1); x < pos[_x] + dim[_x]; x += 2)
 		{
 			Ray ray;
 			ray.pos = cam->pos;
@@ -49,17 +51,28 @@ void render_scop(Worker *worker)
 			v2ui depth_pos = __builtin_convertvector(plane_ratio * DEPTH_MAP_RESOLUTION, v2ui);
 			ray.pos += v3f_norm(ray.dir) * worker->depth_mipmap[depth_pos[_x] + depth_pos[_y] * DEPTH_MAP_RESOLUTION];
 
-			RayHit hit = map_cast_ray(map, ray);
+			RayHit hit = map_cast_ray(map, ray, 10.f, 20.f, 30.f);
 
 			v3f text_coord = hit.real_pos - (v3f){hit.block_pos[_x], hit.block_pos[_y], hit.block_pos[_z]};
-			
+			// float hit_step = hit.step / 10.f + 1.f;
+
+
+			// Info(Alan): Fog work here
+			float real_dist = worker->depth_mipmap[depth_pos[_x] + depth_pos[_y] * DEPTH_MAP_RESOLUTION] + hit.dist;
+			// float fog_dist = 20.f;
+			// float shade = fmaxf((1 / (real_dist / fog_dist + 1) - 0.5f) * 2.f, 0.f);
+			// shade = 1.f - shade;
+			// shade = 1.f - powf(shade, 3.f);
+
 			// hit.dist += worker->depth_mipmap[depth_pos[_x] + depth_pos[_y] * DEPTH_MAP_RESOLUTION];
 			// hit.dist /= 100.0f;
 			// ft_draw(eng, (v2si){x, y}, ft_color_f(0.0f, hit.dist, hit.dist, hit.dist));
 			// ft_draw(eng, (v2si){x, y}, ft_color(0, hit.step << 1, hit.step << 1, hit.step << 1));
 			ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x], text_coord[_y], text_coord[_z]));
+			// ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x] * shade, text_coord[_y] * shade, text_coord[_z] * shade));
+			// ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x] / hit_step, text_coord[_y] / hit_step, text_coord[_z] / hit_step));
 			// float depth = worker->depth_mipmap[depth_pos[_x] + depth_pos[_y] * DEPTH_MAP_RESOLUTION] / 100.0f;
-			// ft_draw(eng, (v2si){x, y}, ft_color_f(0.0f, depth, depth, depth));
+			// ft_draw(eng, (v2si){x, y}, ft_color_f(0.0f, (depth + hit.dist) / 100.0f, depth, depth));
 		}
 	}
 }
@@ -92,13 +105,14 @@ void render_depth_scop(Worker *worker)
 
 			/* Here we save the depth of the pixel zone so that we can directly
 			    jump to this depth when we launch a ray in this zone */
+			// Note(Alan): Need to find a way to substract distance to closest point on last box hit to be 100 % sure about the precision. 
 			worker->depth_mipmap[x + y * DEPTH_MAP_RESOLUTION] = hit.dist;
 		}
 	}
 }
 
 
-void map_render(Engine *eng, Map *map, Camera *cam)
+void map_render(Engine *eng, Map *map, Camera *cam, uint32_t ticks_passed)
 {
 
 	/* Screen planes setup */
@@ -125,21 +139,20 @@ void map_render(Engine *eng, Map *map, Camera *cam)
 
 	/* Thread workers */
 
-	int const num_worker = 8;
-	Worker workers[num_worker];
+	Worker workers[WORKER_NUMBER];
 	int per_worker;
 	int rest;
 	int total_worker;
 
 	/* Pre render for brick depth */
 
-	per_worker = DEPTH_MAP_RESOLUTION / num_worker;
-	rest = DEPTH_MAP_RESOLUTION % num_worker;
+	per_worker = DEPTH_MAP_RESOLUTION / WORKER_NUMBER;
+	rest = DEPTH_MAP_RESOLUTION % WORKER_NUMBER;
 	total_worker = 0;
 
 	float depth_mipmap[DEPTH_MAP_RESOLUTION * DEPTH_MAP_RESOLUTION];
 
-	for (uint32_t i = 0; i < num_worker; i++)
+	for (uint32_t i = 0; i < WORKER_NUMBER; i++)
 	{
 		int this_worker = per_worker + (rest > 0 ? 1 : 0);
 		workers[i].eng = eng;
@@ -151,19 +164,20 @@ void map_render(Engine *eng, Map *map, Camera *cam)
 		workers[i].plane_dir_right = plane_dir_right;
 		workers[i].plane_dir_down = plane_dir_down;
 		workers[i].depth_mipmap = depth_mipmap;
-		pthread_create(&workers[i].thread, NULL, (void *(*)(void *))render_depth_scop, &workers[i]);
+		workers[i].ticks_passed = ticks_passed;
+		pthread_create(&workers[i].thread, NULL, (void * (*)(void *))render_depth_scop, &workers[i]);
 		total_worker += per_worker + (rest > 0 ? 1 : 0);
 	}
 
-	for (uint32_t i = 0; i < num_worker; i++)
+	for (uint32_t i = 0; i < WORKER_NUMBER; i++)
 		pthread_join(workers[i].thread, NULL);
 
 	/* Final render */
 
-	per_worker = eng->sel_spr->size[_y] / num_worker;
-	rest = eng->sel_spr->size[_y] % num_worker;
+	per_worker = eng->sel_spr->size[_y] / WORKER_NUMBER;
+	rest = eng->sel_spr->size[_y] % WORKER_NUMBER;
 	total_worker = 0;
-	for (uint32_t i = 0; i < num_worker; i++)
+	for (uint32_t i = 0; i < WORKER_NUMBER; i++)
 	{
 		int this_worker = per_worker + (rest > 0 ? 1 : 0);
 		workers[i].eng = eng;
@@ -176,11 +190,11 @@ void map_render(Engine *eng, Map *map, Camera *cam)
 		workers[i].plane_dir_right = plane_dir_right;
 		workers[i].plane_dir_down = plane_dir_down;
 		workers[i].depth_mipmap = depth_mipmap;
-		pthread_create(&workers[i].thread, NULL, (void *(*)(void *))render_scop, &workers[i]);
+		pthread_create(&workers[i].thread, NULL, (void * (*)(void *))render_scop, &workers[i]);
 		total_worker += per_worker + (rest > 0 ? 1 : 0);
 	}
 
-	for (uint32_t i = 0; i < num_worker; i++)
+	for (uint32_t i = 0; i < WORKER_NUMBER; i++)
 		pthread_join(workers[i].thread, NULL);
 
 
