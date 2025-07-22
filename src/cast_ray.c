@@ -209,11 +209,32 @@ RayHit map_cast_ray(Map *map, Ray ray, float first_dist, float second_dist, floa
 			break ;
 
 		v3ui sub_brick_pos = brick_pos / 4;
-		if (chunk->occupency.bricks[sub_brick_pos[_x]][sub_brick_pos[_y]][sub_brick_pos[_z]])
+		if (chunk->occupency.bricks[sub_brick_pos[_x]][sub_brick_pos[_y]][sub_brick_pos[_z]] == 0)
 		{
+			/* Raw - Ray box intersection */
 
-			if (hit.dist >= second_dist)
-				break ;
+			v3f box_min;
+			v3f box_max;
+
+			if (chunk->occupency.mask == 0)
+			{
+			 	box_min = __builtin_convertvector(chunk_pos * 8, v3f) - 0.0001f;
+				box_max = box_min + 8.0f + 0.0001f * 2.0f;
+			}
+			else
+			{
+				// if (hit.dist < second_dist) Todo(Alan): Implement proper LOD (make the loop break when out of choices)
+			 	box_min = __builtin_convertvector(chunk_pos * 8 + sub_brick_pos * 4, v3f) - 0.0001f;
+				box_max = box_min + 4.0f + 0.0001f * 2.0f;
+			}
+
+			ray_box_intersect(ray.pos, dir_inv, box_min, box_max, &t);
+			ray.pos += ray.dir * t;
+			block_pos = (v3ui){(int)(ray.pos[_x] + 1), (int)(ray.pos[_y] + 1), (int)(ray.pos[_z] + 1)} - 1;
+			hit.step++;
+		}
+		else
+		{
 
 			/* DDA - Ray box positive intersection */
 
@@ -247,29 +268,6 @@ RayHit map_cast_ray(Map *map, Ray ray, float first_dist, float second_dist, floa
 			int side = inc[_y] | (inc[_z] << 1);
 			float dist = ray_side_dist[side] - dir_inv_abs[side];
 			ray.pos += dist * ray.dir;
-		}
-		else
-		{
-			/* Raw - Ray box intersection */
-
-			v3f box_min;
-			v3f box_max;
-
-			if (chunk->occupency.mask == 0)
-			{
-			 	box_min = __builtin_convertvector(chunk_pos * 8, v3f) - 0.0001f;
-				box_max = box_min + 8.0f + 0.0001f * 2.0f;
-			}
-			else
-			{
-			 	box_min = __builtin_convertvector(chunk_pos * 8 + sub_brick_pos * 4, v3f) - 0.0001f;
-				box_max = box_min + 4.0f + 0.0001f * 2.0f;
-			}
-
-			ray_box_intersect(ray.pos, dir_inv, box_min, box_max, &t);
-			ray.pos += ray.dir * t;
-			block_pos = (v3ui){(int)(ray.pos[_x] + 1), (int)(ray.pos[_y] + 1), (int)(ray.pos[_z] + 1)} - 1;
-			hit.step++;
 		}
 		// TODO(Alan): TEMPORARY!!! To implement properly with square calculation.
 		hit.dist = v3f_mag(ray.pos - start);

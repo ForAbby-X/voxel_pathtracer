@@ -54,7 +54,7 @@ void render_scop(Worker *worker)
 			RayHit hit = map_cast_ray(map, ray, 10.f, 20.f, 30.f);
 
 			v3f text_coord = hit.real_pos - (v3f){hit.block_pos[_x], hit.block_pos[_y], hit.block_pos[_z]};
-			// float hit_step = hit.step / 10.f + 1.f;
+			float hit_step = hit.step / 10.f + 1.f;
 
 
 			// Info(Alan): Fog work here
@@ -68,9 +68,9 @@ void render_scop(Worker *worker)
 			// hit.dist /= 100.0f;
 			// ft_draw(eng, (v2si){x, y}, ft_color_f(0.0f, hit.dist, hit.dist, hit.dist));
 			// ft_draw(eng, (v2si){x, y}, ft_color(0, hit.step << 1, hit.step << 1, hit.step << 1));
-			ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x], text_coord[_y], text_coord[_z]));
+			// ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x], text_coord[_y], text_coord[_z]));
 			// ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x] * shade, text_coord[_y] * shade, text_coord[_z] * shade));
-			// ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x] / hit_step, text_coord[_y] / hit_step, text_coord[_z] / hit_step));
+			ft_draw(eng, (v2si){x, y}, ft_color_f(0, text_coord[_x] / hit_step, text_coord[_y] / hit_step, text_coord[_z] / hit_step));
 			// float depth = worker->depth_mipmap[depth_pos[_x] + depth_pos[_y] * DEPTH_MAP_RESOLUTION] / 100.0f;
 			// ft_draw(eng, (v2si){x, y}, ft_color_f(0.0f, (depth + hit.dist) / 100.0f, depth, depth));
 		}
